@@ -323,17 +323,111 @@ const app = new Vue({
 
 
 
+# 9.模块化开发
+
+1.为什么需要模块化
+
+- 传统的js开发的问题
+
+  - 全局变量命名冲突问题
+  - js导入顺序问题
+  - 代码难以维护的问题
+
+- 解决方式
+
+  - 使用匿名函数可以将全局变量转换为局部变量，可以解决变量冲突问题，但是不能实现变量复用
+
+  ~~~js
+  // 通过闭包的方式解决变量冲突
+  (function() {
+      var flag = true;
+  })()
+  ~~~
+
+  - 使用模块化思维
+
+  ~~~js
+  var ModuleX = (function() {
+      // 1.在方法中定义一个对象，用来装配需要复用的变量
+      var obj = {}
+      
+      obj.flag = true
+  })()
+  
+  // 可以直接通过如下使用
+  console.log(ModuleX.flag)
+  ~~~
+
+  - 这里依然对导入的js的顺序有非常强的依赖
 
 
 
+2.模块化的两个核心：导入和导出
 
+> 模块化的规范和标准很多：CommonJs，AMD，CMD，ES6的Modules
+>
+> node对这些规范都有相应的实现，webpack也是基于CommonJs的模块规范标准
 
+- CommonJs的导入导出规范
 
+~~~js
+// 导出
+module.exports = {
+    flag = true;
+    test : test;
+    Person: Person
+    
+}
 
+test() {
+    console.log("test")
+}
 
+class Person{
+}
 
+// 也可以使用ES6的对象增强语法
+module.exports = {
+	flag: true;
+    test(abc) {
+        console.log(abc)
+    }
+    Person
+}
 
+// 导入
+let {flag,test,Person} = require("..XX.js")
+~~~
 
+- ES6导入导出规范
+
+~~~js
+// 使用export导出 使用import导入
+// 第一种：单个导出
+export flag = true
+
+export test() {}
+
+export class Person{}
+
+// 第二种：对象方式导出
+export {flag,test,Person}
+
+// 第三种：default方式的导出
+// 作用就是不定义方法名，让调用者自己可以自定义方法名
+// 注意：一个js问题件中只能有一个default导出
+export default function() {
+   console.log("test~~~~")
+}
+
+// 导入
+import * as info from '..XX.js'
+
+import {flag} from '..XX.js'
+
+// 导入default，不需要{}
+import myFunction from '..XX.js'
+~~~
 
 
 
