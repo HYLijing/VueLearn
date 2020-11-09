@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    1.什么叫做VUE的组件开发
+    可以这样理解：将我们整个业务页面按照不同的需求做拆分，通过不同的小组件来拼接处整个页面，这个就叫做组价开发
+    组件的作用就是复用，在有需要的情况下都可以复用
+   -->
+  <div id='app'>
+    <!-- 
+      Vue中如何创建和使用组件。
+      1,创建vue的组件构造器
+      2，注册组件
+      3，使用组件
+     -->
+     <!-- 组件必须挂载在某个Vue管理的实例下，否则它不会生效。 -->
+     <!-- 3.使用组件 -->
+     <!-- <cpn></cpn>
+     <cpn></cpn>
+     <cpn></cpn> -->
+     <my></my>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+
+
+    // 调用Vue.extend()创建的是一个组件构造器。 
+    // 通常在创建组件构造器时，传入template代表我们自定义组件的模板。
+    // 该模板就是在使用到组件的地方，要显示的HTML代码。
+    // 1.创建构造组件的构造器
+    const myConstruct = Vue.extend({
+      template:`
+        <div>
+          <input type='text' >用户输入
+        </div>
+      `
+    })
+    
+
+    // 调用Vue.component()是将刚才的组件构造器注册为一个组件，并且给它起一个组件的标签名称。
+    // 所以需要传递两个参数：1、注册组件的标签名 2、组件构造器
+    // 2.注册组件
+    Vue.component('my',myConstruct); // 全局注册
+
+
+
+  //   // 1.创建vue的组件构造器.创建我们的组件的实例
+  //   const cpnConstruct = Vue.extend({
+  //     template: `
+  //     <div>
+  //       <h2>我是标题</h2>
+  //       <p>我是内容 哈哈哈</p>  
+  //     </div>
+  //     `
+  //   });
+
+  //  // 2.注册组件，将我们创建好的组件注册到vue的管理的dom中
+  //  Vue.component('cpn',cpnConstruct);
+
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！'
+      }
+    })
+  </script>
+</body>
+
+</html>

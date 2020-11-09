@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+      <!-- 1.选择一个值的select标签
+          此时v-model绑定的变量可以是一个数组也可以是一个字符串
+      -->
+      <select v-model="fruits">
+        <option value="apple">苹果</option>
+        <option value="banana">香蕉</option>
+        <option value="orange">橘子</option>
+        <option value="grape">葡萄</option>
+      </select>
+      <h2>你选择的水果是： {{fruits}}</h2>
+
+
+      <!-- 如果是可以选择多个下拉框 -->
+      <select v-model="multiFruits" multiple>
+          <option value="苹果">苹果</option>
+          <option value="香蕉">香蕉</option>
+          <option value="橘子">橘子</option>
+          <option value="葡萄">葡萄</option>
+        </select>
+        <h2>你选择的水果是： {{multiFruits}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！',
+        fruits: '',
+        multiFruits: ''
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+
+<!-- 子组件的点击按钮实现父组件的数量变量 -->
+
+<body>
+  <template id="child">
+    <div>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+    </div>
+  </template>
+
+
+
+  <div id='app'>
+      <cpn @increment1="pincrement" @dncrement1="pdecrement"></cpn>
+      <h1>counter为： {{counter}}</h1>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！',
+        counter: 0
+      },
+      methods: {
+        pincrement(number) {
+          this.counter = number
+        },
+        pdecrement(number){
+          this.counter = number
+        }
+      },
+      components: {
+        cpn: {
+          template: '#child',
+          methods: {
+            increment() {
+              this.number++
+              this.$emit("increment1",this.number)
+            },
+            decrement() {
+              this.number--
+              this.$emit("dncrement1",this.number)
+            }
+          },
+          data() {
+            return {
+              number: 0
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

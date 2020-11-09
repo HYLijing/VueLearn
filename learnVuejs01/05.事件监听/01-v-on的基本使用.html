@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<!-- v-on的语法糖：@ -->
+
+<body>
+  <div id='app'>
+    <h1>{{count}}</h1>
+
+    <!-- 通过v-on的监听事件来直接操作count。如果是复杂操作，用methods方法操作 -->
+    <!-- <button v-on:click="count++">+</button>
+    <button v-on:click="count--">-</button> -->
+
+    <!-- 使用methods方法操作count -->
+    <!-- <button v-on:click="increment">+</button>
+    <button v-on:click="decrement">-</button> -->
+
+    <!-- 使用v-on的简写形式。v-on: = @。这里也可以看出冒号(:)是vue中的语法，不是标签中的语法 -->
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！',
+        count: 0
+      },
+      methods: {
+        // es6的语法
+        increment() {
+          this.count++
+        },
+
+        decrement() {
+          this.count--
+        }
+
+      }
+    })
+  </script>
+
+
+
+</body>
+
+</html>

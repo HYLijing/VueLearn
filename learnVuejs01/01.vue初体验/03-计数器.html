@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 新的指令： v-on:click-->   
+    <!-- 新的vue属性，methods -->
+    
+    <div id="app">
+        <h2>数量：{{count}}</h2>
+        <!-- <button v-on:click="count++">+</button>     
+            <button v-on:click="count--">-</button> -->
+        
+        <button v-on:click="add">+</button>
+        <button v-on:click="sub">-</button>
+
+
+    </div>
+
+
+    <!-- 1，引入VueJs -->
+    <script src="../js/vue.js"></script>
+
+    <script>
+
+        // 对象中的赋值全部使用 :。不能使用=。代表的是指向
+        // 标签中的赋值需要使用等于号
+    
+        const data = new Vue({
+            el: '#app',
+            data: {
+                count:0
+            },
+            methods: {
+                add: function() {
+                    this.count ++ , // 拿到当前Vue对象中的count。this代表当前Vue对象
+                    alert("数量加一")
+                },
+
+                sub: function () {
+                    this.count --,
+                    console.log("数量减一")
+                }
+
+            }
+        });
+    
+    
+    </script>
+
+
+
+
+</body>
+</html>

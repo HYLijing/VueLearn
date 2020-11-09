@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<!-- 
+  理解：什么是作用于插槽。
+  父组件替换子组件的标签，数据任然还是子组件的数据。
+  步骤：
+  1.在子组件中定义作用于插槽。
+    在子组件自定的插槽中，使用v-bind将我们的子组件中的变量绑定，就是自定义的插槽
+    这样的话就可以让该组件在被使用时，能够被父组件拿到其内部的变量值，
+  2.我们可以在调用自定义组件的时候，通过templage标签中定义slot-scope标签来获得作用于插槽中绑定的变量
+  
+-->
+
+<body>
+
+  <!-- slot插槽的作用：相当于java中的接口，就是在使用这个组件的时候可以自定义的拓展 -->
+  <template id="slot">
+    <div>
+      <slot :data="pLanguages">
+        <ul v-for="item in pLanguages">
+          <li>{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+
+
+  <div id='app'>
+    <cpn></cpn>
+
+    <cpn>
+      <div>手动的加上标签。这时，插槽slot的默认标签不展示</div>
+    </cpn>
+
+    <!-- 在调用插槽的地方，想拿到插槽默认展示的数据，做自己想要的展示
+      1.将插槽定义为作用于插槽： 在slot标签上使用v-bind绑定变量
+      2.在使用组件的时候，通过template和template标签中的slot-scope标签获得v-bind上的值
+    -->
+    <cpn>
+      <!-- 上面定义的slotData就会放在slotProps中 -->
+      <template slot-scope="slotProps">
+        <!-- <span v-for="item in slotProps.data">{{item}}</span> -->
+        <span>{{slotProps.data.join(" - ")}}</span>
+      </template>
+    </cpn>
+  </div>
+
+
+
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！'
+      },
+      components: {
+        cpn: {
+          template: '#slot',
+          data() {
+            return {
+              pLanguages: ['Java', 'JavaScript', 'Phyton', 'Go', 'C++']
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

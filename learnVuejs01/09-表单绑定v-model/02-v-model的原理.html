@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- <label for="test">
+        <input type="text" id="test" v-model="message">
+    </label> -->
+    <p>{{message}}</p>
+
+    <!-- 1.通过v-bind事件可以将当前的value值绑定到message上 -->
+    <!-- 2.可以通过给当前的input标签添加监听事件，使当前的数据变动后修改变量 -->
+    <!-- 3.也可以直接使用@input来监听一个变量 -->
+    <input type="text" v-bind:value="message" v-on:input="message = $event.target.value">
+
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！'
+      },
+      methods:{
+        changeInput(event) {
+          console.log(event);
+          this.message = event.target.value
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

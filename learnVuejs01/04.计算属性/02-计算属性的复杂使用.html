@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 通过计算属性拿到所有书本价格综合 -->
+    <h1>{{totalPrice}}</h1>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        books: [
+          { id: 1, name: '西游记', price: 199 },
+          { id: 2, name: '红楼梦', price: 109 },
+          { id: 3, name: '水浒传', price: 129 },
+          { id: 4, name: '三国演义', price: 99 },
+        ]
+      },
+      computed: {
+        //  es5的写法
+        // totalPrice: function () {
+        //   var count = 0;
+        //   console.log(this.books.length);
+        //   for (var i = 0; i < this.books.length; i++) {
+        //     count += this.books[i].price;
+        //   }
+        //   return count;
+        // }
+
+
+          /**
+         * es6的写法
+         * 
+         * 关于reduce的认识：
+         * 
+         * array.reduce(function(total, currentValue, currentIndex, arr), initialValue);
+         * 
+         * function可以使用箭头函数代替
+         * total: 必需。初始值, 或者计算结束后的返回值。
+         * currentValue： 必需。当前元素。
+         * currentIndex： 可选。当前元素的索引；
+         * arr： 可选。当前元素所属的数组对象。initialValue: 可选。传递给函数的初始值，相当于total的初始值。。
+          */
+
+        totalPrice: function () {
+          return this.books.reduce((b1,b2) => b1 + b2.price,0);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

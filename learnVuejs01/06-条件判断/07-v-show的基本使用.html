@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id='app'>
+    <h1>{{message}}</h1>
+    <!-- 
+      区别：
+      v-if:当v-if为false时，当前的标签就不存在了，不会展示在dom中
+      v-show：条件为false时，v-show只是给我们添加了一个标签属性，display属性
+
+      开发中如何选择：
+      如果当前标签展示和隐藏比较频繁时，使用v-show，因为它根本就没有删除当前的dom，效率会高一点。
+
+     -->
+    <h2 v-if="isShow">{{message}}</h2>
+    <h2 v-show="isShow">{{message}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！',
+        isShow: true
+      }
+    })
+  </script>
+
+</body>
+
+</html>
