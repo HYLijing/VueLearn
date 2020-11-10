@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+
+<!-- <script src="./src/main.js" type="module"></script>
+<script src="./src/mathUtils.js" type="module"></script> -->
+
+<!-- 使用webpack打包的方式处理
+  1.进入到当前项目的根路径。
+  2.通过webpack 将 main.js打包到dist包下的bundle.js
+    这里生成的bundle.js就是最终放在服务器上的，支持多种模块协议和多浏览器支持的功能
+  3.只需要导入打包后的js即可使用
+
+  如何使用局部的webpack打包。需要在我们的项目中配置局部webpack的依赖包。这些统一的依赖包都是交给
+  node做管理的。配置文件为package.json
+   1.初始化当前项目：npm init
+   2.安装局部webpack
+      npm install webpack@3.6.0 --save-dev
+      --save： 局部依赖
+      -dev：   开发时依赖
+   3.如何使用局部webpack.需要使用又node包中管理的webpack
+    node_modules/.bin/webpack
+   4.配置局部webpack命令
+    在package.json的script中配置映射命令，这里的映射的webpack,使用的会优先找node_module中的webpack
+    通过npm run build
+    这样的话就是讲我们的webpack也全部交给了node的npm来管理。
+    或者说使用npm提供的webpack来做代码的管理
+-->
+
+
+<script src="./dist/bundle.js" type="module"></script>
+
+</body>
+</html>
