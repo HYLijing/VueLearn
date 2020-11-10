@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <template id="templateId">
+    <div>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+      <h2>数量为： {{counter}}</h2>
+    </div>
+  </template>
+
+
+
+  <div id='app'>
+    <!-- 监听子组件发射过来的自定义事件 -->
+      <child @cincrement="pincrement" @cdecrement="pdecrement"></child>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+
+    const child = {
+      template: '#templateId',
+      methods: {
+        increment() {
+          this.counter++
+          this.$emit('cincrement')
+        },
+        decrement() {
+          this.counter--
+          this.$emit('cdecrement')
+        }
+      },
+      data() {
+        return {
+          counter: 0
+        }
+      }
+    }
+
+
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！'
+      },
+      components: {
+        child
+      },
+      methods: {
+        pincrement() {
+          console.log("监听到子组件的cincrement") 
+        },
+        pdecrement() {
+          console.log("监听到子组件的cdecrement")
+        }
+
+      }
+    })
+  </script>
+</body>
+
+</html>

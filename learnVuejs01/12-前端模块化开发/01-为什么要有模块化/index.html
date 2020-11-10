@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    为什么要使用模块化：
+    1.全局变量同名问题。
+      下面的例子可知：flag在aaa中为true，在bbb和mmm中为false
+    2.这种代码的编写方式对js文件的依赖顺序几乎是强制性的
+      aaa和bbb的顺序决定了最终flag的值。
+      维护起来非常麻烦
+
+    3.可以使用匿名函数的方式来解决全局变量混乱的问题。
+    闭包可以解决全局变量混淆的问题，但是不能有解决全局变量复用的问题。
+      例：在mmm中的flag为未定义。
+
+    4.如何通过闭包的方式来解决全局变量共享的问题：这里就是使用模块化思想
+      注意点：
+        1.函数内部，需要使用对象将变量或者函数进项包装
+        2.js的导入顺序
+  -->
+
+  <button id="button" click="cln">按钮</button>
+
+  <script src="./aaa.js"></script>
+  <script src="./bbb.js"></script>
+  <script src="./mmm.js"></script>
+  <script src="./main.js"></script>
+
+  <script>
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h1>{{message}}</h1>
+    <!-- 1.直接通过拼接的方式。 -->
+    <h1>{{firstName}} {{lastName}}</h1>
+
+    <!-- 2.使用方法形式
+        注意：在Mustache语法中调用方法，需要带上方法的括号。否则将会当做对象的一个属性进行解析
+    -->
+    <h1>{{append()}}</h1>
+
+    <!-- 3.使用计算属性方式：顾名思义：将两个属性计算操作后得到的一个最终属性，称之为计算属性
+        计算属性的名称：computed
+        计算属性：也就是一个方法。
+        计算属性的字段名一般为属性的名称，它相当于一个属性字段，所以调用的时候是不需要括号
+    -->
+    <h1>{{fullName}}</h1>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！',
+        firstName: 'Lebron',
+        lastName: 'James'
+      },
+      computed: {
+        fullName: function(){
+          return this.firstName + " " + this.lastName
+        },
+
+          set: function (newValue) {
+              const values = newValue.split(" ");
+              this.firstName = values[0];
+              this.lastName = values[1]
+          },
+
+          get: function() {
+            firstName = this.firstName;
+            lastName = this.lastName
+          }
+
+      },
+      methods: {
+        append: function () {
+          return this.firstName + " " + this.lastName;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

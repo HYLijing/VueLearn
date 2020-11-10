@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <ul>
+      <!-- 当前获取对象中的value值 -->
+      <li v-for="item in obj">{{item}}</li>
+
+      <!-- 2.如果想要拿到当前的key值。需要把key值写在括号后面 -->
+      <li v-for="(item,key) in obj">
+        {{key}} -> {{item}}
+      </li>
+
+      <!-- 3.获取对象中的index -->
+      <li v-for="item,key,index in obj">
+        key值为：{{key}}，item值为：{{item}}，index值为：{{index}} 
+
+      </li>
+    </ul>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        obj: {
+          name: 'Kobe',
+          age: 18,
+          height: 198
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

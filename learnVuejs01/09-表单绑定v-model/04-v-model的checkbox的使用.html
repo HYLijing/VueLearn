@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 1.单个复选框 
+            v-model即为布尔值。
+            此时input的value并不影响v-model的值。
+    -->
+    <label for="check">
+      <input type="checkbox" v-model="message"> 同意协议
+    </label>
+
+    <h2>你是否选择了同意协议：{{message}}</h2>
+
+    <!-- 如果选中的话，message是true。如果message是true的话，我们才可以显示下面的内容 -->
+    <button :disabled="!message">下一步</button><br/>
+
+
+    <!-- 2.多个复选框 
+        多个复选框下，v-model绑定的值是一个数组
+    
+    -->
+    <label><input type="checkbox" value="篮球" v-model="sports">篮球</label>
+    <label><input type="checkbox" value="足球" v-model="sports">足球</label>
+    <label><input type="checkbox" value="羽毛球" v-model="sports">羽毛桥</label>
+    <label><input type="checkbox" value="乒乓球" v-model="sports">乒乓球</label>
+
+    <h2>你选的运动是：{{sports}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: false,
+        sports: []
+      }
+    })
+  </script>
+</body>
+
+</html>

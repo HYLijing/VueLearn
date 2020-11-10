@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+  /* 定义一个class属性 */
+  .active {
+    color: red
+  }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id='app'>
+    <!-- 
+      v-bind动态绑定class属性
+     -->
+
+
+    <!-- 1.传统方式绑定 -->
+    <!-- <h1 style='color: red'>{{message}}</h1> -->
+
+    <!-- 2.传统的class绑定 -->
+    <!-- <h1 class='active'>{{message}}</h1> -->
+
+    <!-- 3.通过v-bind动态绑定 -->
+    <!-- <h1 v-bind:class='style'>{{message}}</h1> -->
+
+    <!-- 4.通过v-bind的对象形式绑定
+      使用{}单括号，表明传入的是一个对象。\
+
+      多个class会做合并，不会做替代
+    -->
+    <!-- <h1 v-bind:class='{active: isActive,isLine: isLine}'>{{message}}</h1>
+    <button v-on:click="toBlack">黑色</button>
+    <button v-on:click="toRed">红色</button> -->
+
+
+    <!-- 5.使用对象+方法的形式 -->
+    <!-- <h1 v-bind:class='getClass()'>{{message}}</h1> -->
+
+    <!-- 6.使用数组形式 -->
+    <!-- <h1 v-bind:class="['active','isLine']">{{message}}</h1> -->
+
+    <!-- 7.使用数组+方法的形式 -->
+    <h1 v-bind:class='getListClass()'>{{message}}</h1>
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！',
+        style: 'active',
+        isActive: true,
+        isLine: true
+      },
+      methods: {
+        toBlack: function () {
+          this.isActive = false;
+        },
+        toRed: function () {
+          this.isActive = true;
+        },
+        getClass: function(){
+          return {active: this.isActive,isLine: this.isLine};
+        },
+        getListClass: function(){
+          return ['active','isLine']
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

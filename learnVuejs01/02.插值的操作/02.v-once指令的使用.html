@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- v-once Mustache中只读一次，后续再改动，数值不变 -->
+
+  <div id='app'>
+    <h1>{{message}}</h1>
+    <h1 v-once>{{message}}</h1>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！'
+      }
+    })
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 对标签中属性的绑定，不能使用Mustache语法 -->
+    <!-- <img src="{{iamge}}"></img>
+    <a href="{{url}}">google</a> -->
+
+    <!-- 使用v-bind动态绑定标签的属性
+        使用方法：在标签中添加v-bind方式。具体的语法糖为 ： 代替
+        注意：使用vue中的指令，在标签中通过冒号：来做赋值
+    
+    -->
+    <img v-bind:src="iamge"></img>
+    <a v-bind:href="url">goole搜索</a>
+
+    <!-- v-bind = : 缩写形式 -->
+    <img :src="iamge"></img>
+    <a :href="url">goole搜索</a>
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！',
+        iamge: 'https://pics1.baidu.com/feed/5366d0160924ab180a3bb8f754b093ca7a890b96.jpeg?token=c3a7598554d929537f2cbd00765dbe40',
+        url: 'http://www.google.com'
+      }
+    })
+  </script>
+
+
+
+
+</body>
+
+</html>

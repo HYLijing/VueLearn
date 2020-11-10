@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+    <!-- 第二部：编写div标签，与vue绑定 -->
+    <div id="app">
+        <h1>数量：{{count}}</h1>  <!--这里标签中的数据就从vue中拿-->
+        <button v-on:click="sum">+</button>   <!--这里的标签中的事件通过绑定vue中的方法来实现-->
+        <button v-on:click="sub">-</button>   <!--具体的绑定方法：
+                                                1.通过vue中的指令进项绑定
+                                                2.v-on
+                                                  v-for
+                                                  v-if
+                                                -->
+    </div>
+
+
+
+    <!-- 第一:引入vue -->
+    <script src="../js/vue.js"></script>
+
+
+    <script>
+        // 第三步：创建vue实例，通过构造方法创建实例
+        const vue = new Vue({
+                // vue中的三个属性
+                el:'#app',      // el属性：与标签绑定的属性字段
+                data: {         // 第二个字段是对象类型的data
+                    count: 0
+                },
+                methods: {      // 第三个字段：对象类型的methods
+                    sum : function () {
+                        count = this.count++ 
+                    },
+
+                    sub : function () {
+                        count = this.count--
+                    }
+                }
+
+
+        });
+    
+    
+    </script>
+
+
+    <script>
+    
+    
+    
+    
+    </script>
+
+
+
+</body>
+</html>

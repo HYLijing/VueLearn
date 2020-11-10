@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <template id="templateId1">
+    <!-- 默认展示 -->
+    <div>
+      <slot :data="pLanguages">
+        <ul v-for="item in pLanguages">
+          <li>{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+  <div id='app'>
+    <!-- 默认展示 -->
+    <cpn></cpn>
+    <!-- 想要自定义展示 -->
+    <cpn>
+      <template slot-scope="getSlotProps">
+        <span v-for="item in getSlotProps.data"> - {{item}} - </span>
+      </template>
+    </cpn>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊！'
+      },
+      components: {
+        cpn: {
+          template: '#templateId1',
+          data() {
+            return {
+              pLanguages: ['JavaScript', 'Python', 'Swift', 'Go', 'C++']
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
