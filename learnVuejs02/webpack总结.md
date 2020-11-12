@@ -135,9 +135,11 @@ npm run build
 
 
 
+# 4.Webpack中loader的使用
 
 
-# 4.CSS文件打包处理
+
+## 1.CSS文件打包处理
 
 > webpack对不同文件的打包需要对应文件的loader
 
@@ -170,7 +172,7 @@ module.exports = {
 }
 ~~~
 
-# 5.图片的打包处理
+## 2.图片的打包处理
 
 - 定义css文件中引入图片
 
@@ -211,7 +213,7 @@ module.exports = {
 }
 ~~~
 
-# 6.将ES6转换为ES6
+## 3.将ES6转换为ES6
 
 使用bable-loader
 
@@ -219,17 +221,346 @@ module.exports = {
 
 
 
+# 5.webpack集成Vue
+
+## 1.引入Vue的三种方式
+
+- 直接下载vue.js的源码，通过src导入
+- 通过CDN方式导入
+- 使用node安装Vue
+
+~~~js
+// 第一步：通过npm安装vue包
+npm install vue --save	// 放在我们当前的node_modules包下，依赖中也有
+// 第二步：在项目中导入
+import Vue from 'vue'
+// 或
+const Vue = require('vue')
+// 第三步：正常使用
+~~~
+
+通过npm引入vue包后，打包文件时注意：
+
+默认情况下，webpack打包时使用的vue是runtime-only版本，我们需要指定vue的版本为：runtime-compiler
+
+在webpack.config.js中文件中添加如下配置：
+
+~~~js
+resolve: {
+    alias: {
+        'vue$':'vue/dist/vue.esm.js'
+    }
+}
+~~~
 
 
 
+## 2.Vue代码的精简
+
+### 1.传统vue代码的编写 :
+
+**注意：模板的编写一定要写在vue实例的上面**
+
+~~~html
+improt Vue from 'vue'
+
+<template>
+	<div>
+    	<h1>{{message}}</h1>
+		<button @click='func'>按钮</button>
+    <div/>    
+</template>
+    
+<div id='app'>
+    <App></App>
+</div>
+
+<script src=''>
+    const App = {
+        template: '#templateId',
+        data() {
+            return {
+                message: '你好啊'
+            }
+        }，
+        methods: {
+            func() {
+                console.log('---')
+            }
+        }
+    }
+
+    new Vue({
+        el: '#app',
+        components: {
+            App
+        }
+    })    
+</script>
+~~~
+
+以上代码会将组件的数据填充到id=app的div中。
 
 
 
+### 2.使用模块化对代码简写：
+
+app.js
+
+~~~js
+exprot default {
+	template: `
+	<div>
+    	<h1>{{message}}</h1>
+		<button @click='func'>按钮</button>
+    <div/>    
+`,
+        data() {
+            return {
+                message: '你好啊'
+            }
+        }，
+        methods: {
+            func() {
+                console.log('---')
+            }
+        }
+}
+~~~
+
+在main.js中直接可以引用：
+
+~~~js
+improt App from '../app.js'
+
+new Vue({
+    el: '#app',
+    template: '<App/>',  //在template中使用组件，会替换绑定的div标签中的数据
+    components: {
+        App
+    }
+})
+~~~
+
+### 3.使用.vue文件终极编写
+
+实现了代码的分离：
+
+~~~vue
+<!-- 模板相关的代码 -->
+<template>
+  <div>
+    <h2>这里是组件的内容</h2>
+    <h1>{{message}}</h1>
+    <button @click="btnClick">按钮</button>
+    <p>{{name}}</p>
+  </div>
+</template>
+
+
+<!-- js相关代码 -->
+<script>
+export default {
+  data() {
+    return {
+      message: "你好啊~~",
+      name: "哈哈哈"
+    };
+  },
+  methods: {
+    btnClick() {
+      console.log("----------");
+    }
+  },
+  //监听属性 类似于data概念
+  computed: {},
+  //监控data中的数据变化
+  watch: {},
+
+  //生命周期 - 创建完成（可以访问当前this实例）
+  created() {},
+  //生命周期 - 挂载完成（可以访问DOM元素）
+  mounted() {},
+  beforeCreate() {}, //生命周期 - 创建之前
+  beforeMount() {}, //生命周期 - 挂载之前
+  beforeUpdate() {}, //生命周期 - 更新之前
+  updated() {}, //生命周期 - 更新之后
+  beforeDestroy() {}, //生命周期 - 销毁之前
+  destroyed() {}, //生命周期 - 销毁完成
+  activated() {} //如果页面有keep-alive缓存功能，这个函数会触发
+};
+</script>
+<style scoped>
+</style>
+~~~
+
+引入.vue文件后，需要注意的点：
+
+- 需要引入对.vue文件的处理loader
+
+~~~js
+npm install vue-loader vue-template-compiler --save-dev
+~~~
+
+- 特别注意：vue的版本，vue-loader版本，vue-template-compiler版本要对应
+- 如果vue-loader的版本大于14.0.0，需要在webpack.config.js中配置plugin
+
+~~~js
+const { VueLoaderPlugin } = require('vue-loader')
+
+module.exports = {
+  ...
+  plugins: [
+    new VueLoaderPlugin()
+  ]
+}
+~~~
 
 
 
+# 6.webpack中使用plugin
+
+webpack中使用plugin的步骤：
+
+- npm安装对应的plugin
+- 在webpack.config.js中配置对应的plugin
+
+~~~js
+const Plugin = require('...')
+
+module.exports= {
+    ...
+    plugins: [
+        new Plugin()
+    ]
+}
+~~~
+
+## 1.配置BannerPlugin
+
+BannerPlugin在包含在webpack中,因此不需要npm再安装
+
+配置webpack.config.js文件
+
+~~~js
+const webpack = require('webpack')
+
+module.exports= {
+    ...
+    plugins: [
+		new webpack.BannerPlugin('这里写Banner的内容')
+    ]
+}
+~~~
+
+## 2.配置打包html的plugin
+
+- npm安装对应的plugin
+
+  ~~~
+  npm install html-webpack-plugin@3.2.0 --save-dev
+  ~~~
+
+- 在webpack.config.js中配置
+
+  ~~~js
+  const HtmlWebpackPlugin = require('html-webpack-plugin')
+  
+  module.exports = {
+      ... 
+       plugins: [
+  		new HtmlWebpackPlugin({
+              template: 'index.html'  // 会按照这个模板生成index.html。并且会导入统计目录下的bundle.js文件
+          })
+      ]
+  }
+  ~~~
+
+- 需要去除webpack.config.js中的publicPath。它指定找静态文件的路径
 
 
+
+## 3.js压缩的Plugin
+
+- npm install uglifyjs-webpack-plugin@1.1.1 --save-dev
+
+- 修改webpack.config.js文件，使用插件：
+
+  ~~~js
+  const UglilyjsWebpackPlugin = require('uglifyjs-webpack-plugin')
+  
+  module.exports = {
+      ... 
+       plugins: [
+  		new HtmlWebpackPlugin({
+              template: 'index.html',  // 会按照这个模板生成index.html。并且会导入统计目录下的bundle.js文件
+          }),
+          new UglilyjsWebpackPlugin()
+      ]
+  }
+  ~~~
+
+
+
+## 4.搭建本地服务器
+
+`webpack-dev-server`：前端的热加载
+
+步骤：
+
+- npm安装
+
+  ~~~js
+  npm install --save-dev webpack-dev-server@2.9.1
+  ~~~
+
+- webpack.config.js中配置
+
+  ~~~js
+  devServer: {
+  	contentBase: './dist',  // 为哪一个文件夹提供本地服务，默认是根文件夹，我们这里要填
+  	port: ,   			// 端口号
+  	inline: true		// 页面实时刷新
+  	historyApiFallback: // 在SPA页面中，依赖HTML5的history模式
+  }
+  ~~~
+
+- 将webpack-dev-server命令安装到npm中，通过package.json指定使用局部安装
+
+  ~~~json
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "webpack",
+        "dev": "webpack-dev-server --open" //可以通过--open指定自动打开链接 
+    },
+  ~~~
+
+- 以后只需要执行：npm run dev即可启动本地webpack-server服务
+
+
+
+## 5.对webpack文件抽离
+
+- 安装webpack-merge
+
+~~~~js
+npm i webpack-merge@4.1.5 --save-dev
+~~~~
+
+- 使用webpack-merge合并basecofnig.js和prod.js或dev.js
+
+~~~js
+const webpackMerge = require('webpack-merge')
+
+module.exports = webpackMerge(baseConfig, {
+  devServer: {
+    contentBase: './dist',
+    inline: true
+  }
+})
+~~~
+
+- 在package.json中指定启动时使用的配置文件
 
 
 
