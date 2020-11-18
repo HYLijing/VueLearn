@@ -1,38 +1,13 @@
 <template>
   <div id="tab-bar">
-    <div class="tab-bar-item">
-      <div>
-        <img src="../../assets/img/tabbar/home.svg" alt>
-      </div>
-      <div>首页</div>
-    </div>
-    <div class="tab-bar-item">
-      <div>
-        <img src="../../assets/img/tabbar/category.svg" alt>
-      </div>
-      <div>分类</div>
-    </div>
-    <div class="tab-bar-item">
-      <div>
-        <img src="../../assets/img/tabbar/shopcart.svg" alt>
-      </div>
-      <div>购物车</div>
-    </div>
-    <div class="tab-bar-item">
-      <div>
-        <img src="../../assets/img/tabbar/profile.svg" alt>
-      </div>
-      <div>我的</div>
-    </div>
+    <slot></slot>
   </div>
 </template>
 
 <script>
-import TabBarItem from "./TabBarItem";
 
 export default {
   components: {
-    TabBarItem
   },
   data() {
     return {};
@@ -64,18 +39,5 @@ export default {
   box-shadow: 0 -1px 1px rgba(100, 100, 100, 0.2);
 }
 
-.tab-bar-item {
-  flex: 1;
-  text-align: center;
-  height: 49px;
-  font-size: 14px;
-}
 
-.tab-bar-item img {
-  width: 24px;
-  height: 24px;
-  margin-top: 3px;
-  vertical-align: middle;
-  margin-bottom: 2px;
-}
 </style>
