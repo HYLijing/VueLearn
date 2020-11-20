@@ -1,0 +1,19 @@
+exact		精确的，准确的
+syntax		语法
+actual		实际的
+promise		诺言，承诺
+vendor		供应商
+meta		元数据
+hook		钩子
+discard		丢弃，遗弃
+previous		以前的，之前的，过去的，上一个的
+reveal		揭示，透露，露出，表明，展示，流露
+reveal in explorer	在资源管理器中显示
+
+
+
+
+
+
+
+
