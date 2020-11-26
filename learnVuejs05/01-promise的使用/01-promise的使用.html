@@ -10,5 +10,48 @@
 
 <body>
 
+  <script>
+    // setTimeout(() => {
+    //   let data = 'Hello World'
+    //   console.log(data)
+    // }, 1000)
+
+    // setTimeout(() => {
+    //   console.log("第一次调用！！！")
+    //   console.log("第一次调用！！！")
+    //   console.log("第一次调用！！！")
+
+    //   setTimeout(() => {
+    //     console.log("第二次调用！！！！")
+    //     console.log("第二次调用！！！！")
+    //     console.log("第二次调用！！！！")
+
+    //     setTimeout(()=> {
+    //       console.log("第三次调用！！！")
+    //       console.log("第三次调用！！！")
+    //       console.log("第三次调用！！！")
+    //     },1000)
+    //   }, 1000)
+    // }, 1000)
+
+    // 定时器的异步事件
+    // setTimeout(() => {
+    //   console.log('Hello World!')
+    // },1000)
+    // 使用Promise调用
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('Hello World!')
+      }, 1000)
+
+      // resolve('Success Data')
+      reject('Error Message')
+    }).then(data => {
+      console.log(data)
+    }).catch(message => {
+      console.log(message)
+    })
+  </script>
 </body>
+
 </html>

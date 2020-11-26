@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // Promise的链式调用
+    // new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve('Hello World')
+    //   }, 1000)
+    // }).then(data => {
+    //   // 第一次对接过进行处理，处理完了可以再次调用请求
+    //     console.log(data)
+    //     return Promise.resolve(data + '111')
+    // }).then(data => {
+    //   console.log(data)
+    //   return Promise.resolve(data + '222')
+    // }).then(data => {
+    //   console.log(data)
+    //   return Promise.resolve(data + '333')
+    // })
+
+
+
+    // Promise的链式调用
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Hello World')
+      }, 1000)
+    }).then(data => {
+      // 第一次对接过进行处理，处理完了可以再次调用请求
+      console.log(data)
+      return data + '111'
+    }).then(data => {
+      console.log(data)
+      return data + '222'
+    }).then(data => {
+      console.log(data)
+      return data + '333'
+    })
+
+    
+  </script>
+</body>
+
+</html>

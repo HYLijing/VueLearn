@@ -9,9 +9,9 @@ discard		丢弃，遗弃
 previous		以前的，之前的，过去的，上一个的
 reveal		揭示，透露，露出，表明，展示，流露
 reveal in explorer	在资源管理器中显示
-
-
-
+mutation		突变，变动
+vulnerability 	脆弱的，有漏洞的
+assets		资产，资源
 
 
 
