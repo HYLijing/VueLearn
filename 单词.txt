@@ -12,8 +12,10 @@ reveal in explorer	在资源管理器中显示
 mutation		突变，变动
 vulnerability 	脆弱的，有漏洞的
 assets		资产，资源
-
-
+patched		已修补的
+snapshot		快照
+license		执照，许可证
+reboot		重启
 
 
 
